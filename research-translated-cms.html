@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research, Translated — AI East West at CHI 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Instrument+Sans:wght@300;400;500&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #4d5795;
+    --navy-dark: #363d6b;
+    --accent: #ff995d;
+    --cream: #f7f3ec;
+    --warm: #fdfaf5;
+    --charcoal: #1e1e1e;
+    --mid: #6a6a6a;
+    --rule: #e2dbd0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Instrument Sans', sans-serif;
+    background: var(--warm);
+    color: var(--charcoal);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: -webkit-sticky; position: sticky; top: 0; z-index: 100;
+    padding: 22px 64px; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(253,250,245,0.97); backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 500; color: var(--navy); letter-spacing: 0.06em; text-decoration: none; }
+  .nav-logo span { color: var(--accent); }
+  .nav-back { font-family: 'Inconsolata', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); text-decoration: none; }
+  .nav-back:hover { color: var(--navy); }
+
+  /* ── HERO ── */
+  .hero { padding: 80px 64px 60px; max-width: 800px; }
+  .hero-top-label {
+    font-family: 'Inconsolata', monospace; font-size: 0.65rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-top-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 500; line-height: 1.12; color: var(--charcoal); margin-bottom: 12px; }
+  .hero h1 em { font-style: italic; color: var(--navy); }
+  .hero-sub { font-family: 'Inconsolata', monospace; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--mid); margin-bottom: 28px; }
+  .hero-desc { font-size: 1rem; color: var(--mid); line-height: 1.85; font-weight: 300; max-width: 620px; }
+  .hero-desc strong { color: var(--charcoal); font-weight: 500; }
+  .placeholder-badge {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: 40px; padding: 10px 16px;
+    background: rgba(77,87,149,0.06); border: 1px dashed rgba(77,87,149,0.2); border-radius: 4px;
+    font-family: 'Inconsolata', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid);
+  }
+  .divider { height: 1px; background: var(--rule); margin: 0 64px; }
+
+  /* ── HOW IT WORKS ── */
+  .how-section { padding: 48px 64px 0; }
+  .how-section .label { font-family: 'Inconsolata', monospace; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+  .how-section .label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+  .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 900px; }
+  .how-step { padding: 20px 0; }
+  .how-num { font-family: 'Inconsolata', monospace; font-size: 0.6rem; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 8px; }
+  .how-step h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 500; color: var(--charcoal); margin-bottom: 6px; line-height: 1.25; }
+  .how-step p { font-size: 0.82rem; color: var(--mid); font-weight: 300; line-height: 1.65; }
+
+  /* ── CARDS GRID ── */
+  .cards-section { padding: 60px 64px 100px; }
+  .cards-section .label { font-family: 'Inconsolata', monospace; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .cards-section .label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+  .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 24px; }
+
+  .memo-card {
+    background: white; border: 1px solid var(--rule); border-radius: 5px;
+    overflow: hidden; cursor: pointer; transition: box-shadow 0.3s, transform 0.2s; position: relative;
+  }
+  .memo-card:hover { box-shadow: 0 8px 32px rgba(77,87,149,0.1); transform: translateY(-3px); }
+  .memo-card-bar { height: 3px; background: var(--navy); }
+  .memo-card:nth-child(3n+2) .memo-card-bar { background: var(--accent); }
+  .memo-card:nth-child(3n) .memo-card-bar { background: linear-gradient(90deg, var(--navy), var(--accent)); }
+  .memo-card-img {
+    display: none;
+    height: 140px;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 1px solid var(--rule);
+  }
+  .memo-card-body { padding: 28px 24px 32px; }
+  .memo-card-topic { font-family: 'Inconsolata', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .memo-card-headline { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 500; color: var(--charcoal); line-height: 1.28; margin-bottom: 14px; }
+  .memo-card-researcher { font-size: 0.82rem; color: var(--mid); font-weight: 300; margin-bottom: 16px; line-height: 1.5; }
+  .memo-card-langs { display: flex; gap: 6px; flex-wrap: wrap; }
+  .lang-btn {
+    font-family: 'Inconsolata', monospace; font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px; border: 1px solid transparent; cursor: pointer;
+    background: rgba(77,87,149,0.06); color: var(--navy); transition: all 0.15s;
+  }
+  .lang-btn.active { background: var(--navy); color: white; }
+  .lang-btn:hover:not(.active) { border-color: var(--navy); }
+  .memo-card-cta {
+    display: flex; align-items: center; gap: 6px; margin-top: 18px;
+    font-family: 'Inconsolata', monospace; font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--navy); opacity: 0; transition: opacity 0.2s;
+  }
+  .memo-card:hover .memo-card-cta { opacity: 1; }
+
+  /* ── CAROUSEL MODAL ── */
+  .carousel-overlay {
+    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(30,30,30,0.88); backdrop-filter: blur(8px); z-index: 200;
+    justify-content: center; align-items: center; padding: 40px;
+  }
+  .carousel-overlay.active { display: flex; }
+  .carousel-container { position: relative; width: 100%; max-width: 520px; }
+  .carousel-close {
+    position: absolute; top: -44px; right: 0; background: none; border: none;
+    color: rgba(255,255,255,0.5); font-size: 1.5rem; cursor: pointer; padding: 4px 8px;
+  }
+  .carousel-close:hover { color: white; }
+
+  .carousel-lang-switcher {
+    display: flex; gap: 6px; margin-bottom: 14px; justify-content: center;
+  }
+  .carousel-lang-btn {
+    font-family: 'Inconsolata', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
+    background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); transition: all 0.15s;
+  }
+  .carousel-lang-btn.active { background: rgba(255,255,255,0.15); color: white; border-color: rgba(255,255,255,0.3); }
+  .carousel-lang-btn:hover:not(.active) { border-color: rgba(255,255,255,0.25); }
+
+  .carousel-slide {
+    background: white; border-radius: 6px; overflow: hidden;
+    aspect-ratio: 4/5; display: flex; flex-direction: column;
+  }
+  .carousel-slide-bar { height: 4px; background: var(--navy); flex-shrink: 0; }
+  .carousel-slide-body { flex: 1; padding: 40px 36px; display: flex; flex-direction: column; justify-content: space-between; }
+  .carousel-slide-series { font-family: 'Inconsolata', monospace; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+  .carousel-slide-num { font-family: 'Inconsolata', monospace; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--mid); margin-bottom: 10px; }
+  .carousel-slide-headline { font-family: 'Cormorant Garamond', serif; font-size: 1.65rem; font-weight: 500; color: var(--charcoal); line-height: 1.25; margin-bottom: 20px; }
+  .carousel-slide-text { font-size: 0.92rem; color: var(--mid); line-height: 1.8; font-weight: 300; }
+  .carousel-slide-text strong { color: var(--charcoal); font-weight: 500; }
+  .carousel-slide-bottom { border-top: 1px solid var(--rule); padding-top: 20px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .carousel-slide-researcher { font-size: 0.82rem; color: var(--mid); font-weight: 300; }
+  .carousel-slide-researcher strong { color: var(--charcoal); font-weight: 500; display: block; margin-bottom: 2px; font-size: 0.88rem; }
+  .carousel-slide-logo { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: var(--navy); opacity: 0.5; }
+  .carousel-slide-logo span { color: var(--accent); }
+
+  .carousel-nav { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 20px; }
+  .carousel-btn {
+    width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.7);
+    font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .carousel-btn:hover { background: rgba(255,255,255,0.18); }
+  .carousel-dots { display: flex; gap: 8px; }
+  .carousel-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; transition: background 0.2s; }
+  .carousel-dot.active { background: var(--accent); }
+
+  /* ── CTA ── */
+  .cta-section { padding: 80px 64px; background: var(--navy); text-align: center; }
+  .cta-section .label { justify-content: center; color: rgba(255,255,255,0.4); font-family: 'Inconsolata', monospace; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+  .cta-section .label::before { content: ''; display: block; width: 24px; height: 1px; background: rgba(255,255,255,0.3); }
+  .cta-section h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 500; color: white; line-height: 1.2; max-width: 480px; margin: 0 auto 16px; }
+  .cta-section h2 em { font-style: italic; color: var(--accent); }
+  .cta-sub { font-size: 0.92rem; color: rgba(255,255,255,0.45); max-width: 400px; margin: 0 auto 40px; font-weight: 300; line-height: 1.8; }
+  .signup-form { display: flex; gap: 10px; max-width: 400px; margin: 0 auto; }
+  .signup-input { flex: 1; padding: 14px 18px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 3px; color: white; font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; outline: none; }
+  .signup-input::placeholder { color: rgba(255,255,255,0.32); }
+  .signup-input:focus { border-color: rgba(255,255,255,0.32); background: rgba(255,255,255,0.11); }
+  .signup-btn { padding: 14px 22px; background: var(--accent); color: white; border: none; border-radius: 3px; font-family: 'Inconsolata', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
+  .signup-btn:hover { background: #e8854a; }
+  .signup-note { margin-top: 12px; font-size: 0.68rem; color: rgba(255,255,255,0.25); font-family: 'Inconsolata', monospace; letter-spacing: 0.06em; }
+
+  footer { background: #171b30; padding: 36px 64px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 500; color: rgba(255,255,255,0.6); }
+  .footer-logo span { color: var(--accent); }
+  .footer-tagline { font-family: 'Inconsolata', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.22); margin-top: 6px; text-transform: uppercase; }
+  .footer-right { font-family: 'Inconsolata', monospace; font-size: 0.62rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.18); text-transform: uppercase; }
+
+  @media (max-width: 1024px) {
+    nav { padding: 18px 24px; }
+    .hero, .how-section, .cards-section, .cta-section { padding-left: 24px; padding-right: 24px; }
+    .divider { margin: 0 24px; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .how-grid { grid-template-columns: 1fr; }
+    .signup-form { flex-direction: column; }
+    footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .carousel-overlay { padding: 24px 16px; }
+    .carousel-slide { aspect-ratio: auto; min-height: 480px; }
+  }
+  @media (min-width: 1025px) and (max-width: 1200px) {
+    .cards-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">AI <span>East</span> West</a>
+  <a href="#" class="nav-back">← Back to main</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-top-label">Research, Translated</div>
+  <h1>Insights Across <em>Borders</em></h1>
+  <div class="hero-sub">Field notes from CHI 2026 · Barcelona → the world</div>
+  <p class="hero-desc">
+    AI East West speaks to leading AI &amp; HCI researchers — bringing <strong>frontier questions to the people AI actually affects</strong>. Each conversation becomes a multilingual memo: what this research means, who it matters to, and why it crosses borders.
+  </p>
+  <div class="placeholder-badge">◇ Preview — memos publish during and after CHI 2026</div>
+</section>
+
+<div class="divider"></div>
+
+<section class="how-section">
+  <div class="label">How it works</div>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="how-num">01</div>
+      <h3>5-minute conversation</h3>
+      <p>We ask a researcher one sharp question about what their work means for people outside academia.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">02</div>
+      <h3>Multilingual memo</h3>
+      <p>We translate the insight into a 4-slide visual memo in English, Chinese, and Japanese.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">03</div>
+      <h3>Shared everywhere</h3>
+      <p>Each slide works as a standalone social post — or read the full sequence here.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider" style="margin-top: 48px;"></div>
+
+<section class="cards-section">
+  <div class="label">Memos</div>
+  <div class="cards-grid" id="cardsGrid">
+    <!-- Cards generated dynamically from data -->
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="label">Stay in touch</div>
+  <h2>Follow these conversations as they <em>unfold</em></h2>
+  <p class="cta-sub">Get multilingual memos from CHI 2026 and beyond — frontier research, translated for the people it affects.</p>
+  <a href="index.html#connect" style="display: inline-block; padding: 14px 28px; background: var(--accent); color: white; border-radius: 3px; font-family: 'Inconsolata', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background 0.2s;">Get involved →</a>
+  <p class="signup-note">Sign up on our main page to stay connected and shape this work.</p>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-logo">AI <span>East</span> West</div>
+    <div class="footer-tagline">東西 · Research, Translated</div>
+  </div>
+  <div class="footer-right">CHI 2026 · Barcelona</div>
+</footer>
+
+<!-- CAROUSEL MODAL -->
+<div class="carousel-overlay" id="carouselOverlay">
+  <div class="carousel-container">
+    <button class="carousel-close" onclick="closeCarousel()">✕</button>
+    <div class="carousel-lang-switcher" id="carouselLangSwitcher"></div>
+    <div class="carousel-slide" id="carouselSlide">
+      <div class="carousel-slide-bar"></div>
+      <div class="carousel-slide-body">
+        <div class="carousel-slide-top">
+          <div class="carousel-slide-series">Research, Translated · CHI 2026</div>
+          <div class="carousel-slide-num" id="slideNum"></div>
+          <div class="carousel-slide-headline" id="slideHeadline"></div>
+          <p class="carousel-slide-text" id="slideText"></p>
+        </div>
+        <div class="carousel-slide-bottom">
+          <div class="carousel-slide-researcher" id="slideResearcher"></div>
+          <div class="carousel-slide-logo">AI <span>East</span> West</div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-nav">
+      <button class="carousel-btn" onclick="prevSlide()">←</button>
+      <div class="carousel-dots" id="carouselDots"></div>
+      <button class="carousel-btn" onclick="nextSlide()">→</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtG_tsVISezCEkRDyMMiEtyiSQ1VG4Yzx0MSxHmXcJ1cmhLwRYsaHdObGO260q1YM5UNgVA4Ci7i4j/pub?gid=365175489&single=true&output=csv';
+
+// ── CSV parser that handles quoted fields with commas ──
+function parseCSV(text) {
+  const lines = [];
+  let current = '';
+  let inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (ch === '"') {
+      if (inQuotes && text[i+1] === '"') { current += '"'; i++; }
+      else { inQuotes = !inQuotes; }
+    } else if (ch === '\n' && !inQuotes) {
+      lines.push(current); current = '';
+    } else {
+      current += ch;
+    }
+  }
+  if (current.trim()) lines.push(current);
+
+  const header = lines[0].split(',');
+  return lines.slice(1).filter(l => l.trim()).map(line => {
+    const cols = [];
+    let field = ''; let inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') {
+        if (inQ && line[i+1] === '"') { field += '"'; i++; }
+        else { inQ = !inQ; }
+      } else if (ch === ',' && !inQ) {
+        cols.push(field); field = '';
+      } else {
+        field += ch;
+      }
+    }
+    cols.push(field);
+    const obj = {};
+    header.forEach((h, i) => { obj[h.trim()] = (cols[i] || '').trim(); });
+    return obj;
+  });
+}
+
+// ── Build structured memo index from flat data ──
+function buildMemoIndex(data) {
+  const index = {};
+  data.forEach(row => {
+    const id = row.memo_id;
+    const lang = row.language;
+    if (!id || !lang) return;
+    if (!index[id]) index[id] = { langs: (row.lang_tags || 'EN').split(',').map(l => l.trim()), byLang: {} };
+    if (!index[id].byLang[lang]) index[id].byLang[lang] = [];
+    index[id].byLang[lang].push({
+      ...row,
+      slide_number: parseInt(row.slide_number) || 1
+    });
+  });
+  Object.values(index).forEach(memo => {
+    Object.values(memo.byLang).forEach(slides => slides.sort((a,b) => a.slide_number - b.slide_number));
+  });
+  return index;
+}
+
+let memoIndex = {};
+let memoIds = [];
+
+// ── Render cards with optional image thumbnails ──
+function renderCards() {
+  const grid = document.getElementById('cardsGrid');
+  grid.innerHTML = '';
+  if (memoIds.length === 0) {
+    grid.innerHTML = '<p style="color: var(--mid); font-size: 0.88rem; font-weight: 300; grid-column: 1/-1;">Loading memos from database...</p>';
+    return;
+  }
+  memoIds.forEach((id) => {
+    const memo = memoIndex[id];
+    const firstLang = Object.keys(memo.byLang)[0];
+    const firstSlide = memo.byLang[firstLang][0];
+    const imgPath = 'images/' + id + '-image.jpg';
+    const card = document.createElement('div');
+    card.className = 'memo-card';
+    card.onclick = () => openCarousel(id, firstLang);
+    card.innerHTML = `
+      <div class="memo-card-bar"></div>
+      <div class="memo-card-img" id="img-${id}"></div>
+      <div class="memo-card-body">
+        <div class="memo-card-topic">${firstSlide.topic || ''}</div>
+        <div class="memo-card-headline">${firstSlide.headline || ''}</div>
+        <div class="memo-card-researcher">${firstSlide.researcher_name || ''} · ${firstSlide.researcher_affiliation || ''}</div>
+        <div class="memo-card-langs">
+          ${memo.langs.map(l => `<span class="lang-btn${l===firstLang?' active':''}" onclick="event.stopPropagation(); openCarousel('${id}','${l}')">${l}</span>`).join('')}
+        </div>
+        <div class="memo-card-cta">Read memo →</div>
+      </div>
+    `;
+    grid.appendChild(card);
+    // Try loading image; hide container if not found
+    const imgEl = document.getElementById('img-' + id);
+    const testImg = new Image();
+    testImg.onload = () => { imgEl.style.backgroundImage = `url(${imgPath})`; imgEl.style.display = 'block'; };
+    testImg.onerror = () => { imgEl.style.display = 'none'; };
+    testImg.src = imgPath;
+  });
+}
+
+// ── Carousel state ──
+let curMemoId = null;
+let curLang = 'EN';
+let curSlideIdx = 0;
+
+function openCarousel(memoId, lang) {
+  curMemoId = memoId;
+  curLang = lang || 'EN';
+  curSlideIdx = 0;
+  renderCarousel();
+  document.getElementById('carouselOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCarousel() {
+  document.getElementById('carouselOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function renderCarousel() {
+  const memo = memoIndex[curMemoId];
+  const switcher = document.getElementById('carouselLangSwitcher');
+  switcher.innerHTML = memo.langs.map(l =>
+    `<button class="carousel-lang-btn${l===curLang?' active':''}" onclick="switchLang('${l}')">${l}</button>`
+  ).join('');
+
+  const slides = memo.byLang[curLang] || memo.byLang['EN'];
+  if (curSlideIdx >= slides.length) curSlideIdx = 0;
+  const slide = slides[curSlideIdx];
+
+  document.getElementById('slideNum').textContent = `${curSlideIdx + 1} / ${slides.length}`;
+  document.getElementById('slideHeadline').textContent = slide.headline || '';
+  document.getElementById('slideText').innerHTML = slide.slide_text || '';
+  document.getElementById('slideResearcher').innerHTML = `<strong>${slide.researcher_name || ''}</strong>${slide.researcher_affiliation || ''}`;
+
+  const dotsEl = document.getElementById('carouselDots');
+  dotsEl.innerHTML = '';
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'carousel-dot' + (i === curSlideIdx ? ' active' : '');
+    dot.onclick = () => { curSlideIdx = i; renderCarousel(); };
+    dotsEl.appendChild(dot);
+  });
+}
+
+function switchLang(lang) { curLang = lang; curSlideIdx = 0; renderCarousel(); }
+function nextSlide() {
+  const slides = memoIndex[curMemoId].byLang[curLang] || memoIndex[curMemoId].byLang['EN'];
+  curSlideIdx = (curSlideIdx + 1) % slides.length; renderCarousel();
+}
+function prevSlide() {
+  const slides = memoIndex[curMemoId].byLang[curLang] || memoIndex[curMemoId].byLang['EN'];
+  curSlideIdx = (curSlideIdx - 1 + slides.length) % slides.length; renderCarousel();
+}
+
+document.getElementById('carouselOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('carouselOverlay')) closeCarousel();
+});
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('carouselOverlay').classList.contains('active')) return;
+  if (e.key === 'Escape') closeCarousel();
+  if (e.key === 'ArrowRight') nextSlide();
+  if (e.key === 'ArrowLeft') prevSlide();
+});
+
+// ── Fallback data (always renders immediately, replaced by Google Sheets if available) ──
+const FALLBACK = [
+  {memo_id:"memo-001",language:"EN",slide_number:1,topic:"AI & Robotics",headline:"An AI governance researcher asks: when a robot decides who gets help first, whose values is it using?",slide_text:"Large language models are increasingly embedded in social robots that assist people in real time across care, service, and public spaces. Their behaviours in these embodied settings are not yet reliably governed, posing downstream risks in everyday situations such as prioritising whom to assist first, a question that is already value-laden before any model is involved.",researcher_name:"Carmen Ng",researcher_affiliation:"Technical University of Munich · CHI 2026",lang_tags:"EN,中文,日本語"},
+  {memo_id:"memo-001",language:"EN",slide_number:2,topic:"AI & Robotics",headline:"A problem not yet safeguarded",slide_text:"When a robot in a busy train station concourse can only help one person at a time, it must decide who goes first. A tourist asking for directions or a distressed person reporting a lost wallet? An elderly person or a child? A larger group or a lone individual? Someone speaking the local language or a foreign visitor? Each sequencing decision reflects values about urgency, vulnerability, and social status.",researcher_name:"Carmen Ng",researcher_affiliation:"Technical University of Munich · CHI 2026",lang_tags:"EN,中文,日本語"},
+  {memo_id:"memo-001",language:"EN",slide_number:3,topic:"AI & Robotics",headline:"Why this matters to you",slide_text:"As AI-powered robots enter public spaces, they allocate scarce attention through interaction, deciding who is acknowledged, deferred, and helped. These are governance decisions enacted at the point of contact, not back-end technical parameters.",researcher_name:"Carmen Ng",researcher_affiliation:"Technical University of Munich · CHI 2026",lang_tags:"EN,中文,日本語"},
+  {memo_id:"memo-001",language:"EN",slide_number:4,topic:"AI & Robotics",headline:"Designing for disagreement: a different approach",slide_text:"This research proposes that robots should operate within a bounded set of pre-approved prioritisation modes, make the active mode visible at the point of interaction, and provide a lightweight way for anyone to contest a specific decision without overriding the entire system.",researcher_name:"Carmen Ng",researcher_affiliation:"Technical University of Munich · CHI 2026",lang_tags:"EN,中文,日本語"},
+  {memo_id:"memo-002",language:"EN",slide_number:1,topic:"Culturally-Aware AI",headline:"A fairness researcher explains why your AI treats politeness as a Western default",slide_text:"Placeholder: full content after the conversation takes place at CHI 2026.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-002",language:"EN",slide_number:2,topic:"Culturally-Aware AI",headline:"The research",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-002",language:"EN",slide_number:3,topic:"Culturally-Aware AI",headline:"Why this matters to you",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-002",language:"EN",slide_number:4,topic:"Culturally-Aware AI",headline:"Read more",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-003",language:"EN",slide_number:1,topic:"AI in Healthcare",headline:"A robotics designer on why your hospital AI might not understand your grandmother",slide_text:"Placeholder: full content after the conversation takes place at CHI 2026.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-003",language:"EN",slide_number:2,topic:"AI in Healthcare",headline:"The gap",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-003",language:"EN",slide_number:3,topic:"AI in Healthcare",headline:"Why this matters to you",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-003",language:"EN",slide_number:4,topic:"AI in Healthcare",headline:"Read more",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-004",language:"EN",slide_number:1,topic:"AI & Education",headline:"What a Japanese privacy study means for your child's school app",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[Institution] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-004",language:"EN",slide_number:2,topic:"AI & Education",headline:"The research",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[Institution] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-004",language:"EN",slide_number:3,topic:"AI & Education",headline:"Why this matters to you",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[Institution] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-004",language:"EN",slide_number:4,topic:"AI & Education",headline:"Read more",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[Institution] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-005",language:"EN",slide_number:1,topic:"Multilingual Safety",headline:"An NLP researcher on why AI safety breaks when you switch languages",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-005",language:"EN",slide_number:2,topic:"Multilingual Safety",headline:"The research",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-005",language:"EN",slide_number:3,topic:"Multilingual Safety",headline:"Why this matters to you",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-005",language:"EN",slide_number:4,topic:"Multilingual Safety",headline:"Read more",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-006",language:"EN",slide_number:1,topic:"Creative AI",headline:"A manga artist and a computer scientist disagree about who made the image",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[Institution] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-006",language:"EN",slide_number:2,topic:"Creative AI",headline:"The research",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[Institution] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-006",language:"EN",slide_number:3,topic:"Creative AI",headline:"Why this matters to you",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[Institution] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-006",language:"EN",slide_number:4,topic:"Creative AI",headline:"Read more",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[Institution] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-007",language:"EN",slide_number:1,topic:"AI Governance",headline:"A policy researcher on why the EU AI Act doesn't translate in Singapore",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[Institute] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-007",language:"EN",slide_number:2,topic:"AI Governance",headline:"The research",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[Institute] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-007",language:"EN",slide_number:3,topic:"AI Governance",headline:"Why this matters to you",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[Institute] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-007",language:"EN",slide_number:4,topic:"AI Governance",headline:"Read more",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[Institute] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-008",language:"EN",slide_number:1,topic:"Human-AI Trust",headline:"Why 'human oversight' means something completely different in three countries",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-008",language:"EN",slide_number:2,topic:"Human-AI Trust",headline:"The research",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-008",language:"EN",slide_number:3,topic:"Human-AI Trust",headline:"Why this matters to you",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-008",language:"EN",slide_number:4,topic:"Human-AI Trust",headline:"Read more",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-009",language:"EN",slide_number:1,topic:"AI & Labor",headline:"A sociologist explains why algorithmic management hits differently in East Asia",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-009",language:"EN",slide_number:2,topic:"AI & Labor",headline:"The research",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-009",language:"EN",slide_number:3,topic:"AI & Labor",headline:"Why this matters to you",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+  {memo_id:"memo-009",language:"EN",slide_number:4,topic:"AI & Labor",headline:"Read more",slide_text:"Placeholder.",researcher_name:"[Researcher name]",researcher_affiliation:"[University] · CHI 2026",lang_tags:"EN"},
+];
+
+// ── Render fallback immediately, then try Google Sheets ──
+memoIndex = buildMemoIndex(FALLBACK);
+memoIds = [...new Set(FALLBACK.map(r => r.memo_id))];
+renderCards();
+
+// Try loading live data from Google Sheets (replaces fallback if successful)
+fetch(SHEET_URL)
+  .then(res => res.text())
+  .then(csv => {
+    const data = parseCSV(csv);
+    if (data.length > 0) {
+      memoIndex = buildMemoIndex(data);
+      memoIds = [...new Set(data.map(r => r.memo_id).filter(Boolean))];
+      renderCards();
+    }
+  })
+  .catch(err => { console.log('Using fallback data (sheet not reachable):', err); });
+</script>
+</body>
+</html>
