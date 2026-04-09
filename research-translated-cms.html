@@ -407,7 +407,7 @@ function renderCards() {
         <div class="memo-card-topic">${firstSlide.topic || ''}</div>
         <div class="memo-card-headline">${firstSlide.headline || ''}</div>
         <div class="memo-card-researcher">${firstSlide.researcher_name || ''} · ${firstSlide.researcher_affiliation || ''}</div>
-        ${firstSlide.paper_link ? `<a href="${firstSlide.paper_link}" target="_blank" onclick="event.stopPropagation();" style="display: inline-block; font-family: 'Inconsolata', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); text-decoration: none; margin-bottom: 12px; opacity: 0.7; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">Read paper →</a>` : ''}
+        ${firstSlide.paper_link ? `<a href="${firstSlide.paper_link}" target="_blank" onclick="event.stopPropagation();" style="display: inline-block; font-family: 'Inconsolata', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: white; background: var(--navy); text-decoration: none; padding: 6px 14px; border-radius: 3px; margin-bottom: 12px;">Read paper →</a>` : ''}
         <div class="memo-card-langs">
           ${memo.langs.map(l => `<span class="lang-btn${l===firstLang?' active':''}" onclick="event.stopPropagation(); openCarousel('${id}','${l}')">${l}</span>`).join('')}
         </div>
