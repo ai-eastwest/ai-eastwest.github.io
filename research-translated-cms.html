@@ -320,47 +320,36 @@
 <script>
 const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtG_tsVISezCEkRDyMMiEtyiSQ1VG4Yzx0MSxHmXcJ1cmhLwRYsaHdObGO260q1YM5UNgVA4Ci7i4j/pub?gid=365175489&single=true&output=csv';
 
-// ── CSV parser that handles quoted fields with commas and \r\n ──
+// ── CSV parser for Google Sheets published CSV ──
 function parseCSV(text) {
-  // Normalize line endings
   text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-  
-  const lines = [];
-  let current = '';
-  let inQuotes = false;
-  for (let i = 0; i < text.length; i++) {
-    const ch = text[i];
-    if (ch === '"') {
-      if (inQuotes && text[i+1] === '"') { current += '"'; i++; }
-      else { inQuotes = !inQuotes; }
-    } else if (ch === '\n' && !inQuotes) {
-      lines.push(current); current = '';
+  var rows = [];
+  var row = [];
+  var field = '';
+  var inQ = false;
+  for (var i = 0; i < text.length; i++) {
+    var c = text[i];
+    if (inQ) {
+      if (c === '"' && text[i+1] === '"') { field += '"'; i++; }
+      else if (c === '"') { inQ = false; }
+      else { field += c; }
     } else {
-      current += ch;
+      if (c === '"') { inQ = true; }
+      else if (c === ',') { row.push(field); field = ''; }
+      else if (c === '\n') { row.push(field); if (row.length > 1) rows.push(row); row = []; field = ''; }
+      else { field += c; }
     }
   }
-  if (current.trim()) lines.push(current);
-
-  const header = lines[0].split(',').map(h => h.trim());
-  return lines.slice(1).filter(l => l.trim()).map(line => {
-    const cols = [];
-    let field = ''; let inQ = false;
-    for (let i = 0; i < line.length; i++) {
-      const ch = line[i];
-      if (ch === '"') {
-        if (inQ && line[i+1] === '"') { field += '"'; i++; }
-        else { inQ = !inQ; }
-      } else if (ch === ',' && !inQ) {
-        cols.push(field.trim()); field = '';
-      } else {
-        field += ch;
-      }
-    }
-    cols.push(field.trim());
-    const obj = {};
-    header.forEach((h, i) => { obj[h] = (cols[i] || '').trim(); });
-    return obj;
-  });
+  if (field || row.length > 0) { row.push(field); if (row.length > 1) rows.push(row); }
+  if (rows.length < 2) return [];
+  var hdr = rows[0].map(function(h){ return h.trim(); });
+  var out = [];
+  for (var r = 1; r < rows.length; r++) {
+    var o = {};
+    for (var c = 0; c < hdr.length; c++) { o[hdr[c]] = (rows[r][c] || '').trim(); }
+    if (o.memo_id) out.push(o);
+  }
+  return out;
 }
 
 // ── Build structured memo index from flat data ──
