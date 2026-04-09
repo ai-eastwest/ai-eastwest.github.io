@@ -61,11 +61,11 @@
 
   /* ── HOW IT WORKS ── */
   .how-section { padding: 48px 64px 0; }
-  .how-section .label { font-family: 'Inconsolata', monospace; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+  .how-section .label { font-family: 'Inconsolata', monospace; font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
   .how-section .label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
   .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 900px; }
   .how-step { padding: 20px 0; }
-  .how-num { font-family: 'Inconsolata', monospace; font-size: 0.6rem; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 8px; }
+  .how-num { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 600; color: var(--accent); line-height: 1; margin-bottom: 12px; opacity: 0.7; }
   .how-step h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 500; color: var(--charcoal); margin-bottom: 6px; line-height: 1.25; }
   .how-step p { font-size: 0.82rem; color: var(--mid); font-weight: 300; line-height: 1.65; }
 
@@ -236,7 +236,7 @@
   <h1>Insights Across <em>Borders</em></h1>
   <div class="hero-sub">Field notes from CHI 2026 · Barcelona → the world</div>
   <p class="hero-desc">
-    AI East West speaks to leading AI &amp; HCI researchers — bringing <strong>frontier questions to the people AI actually affects</strong>. Each conversation becomes a multilingual memo: what this research means, who it matters to, and why it crosses borders.
+    AI East West speaks to leading AI &amp; HCI researchers — bringing <strong>frontier questions and findings to people from all walks of life affected by AI</strong>. Each conversation becomes a multilingual memo: what this research means, who it matters to, and why it crosses borders.
   </p>
   <div class="placeholder-badge">◇ Preview — memos publish during and after CHI 2026</div>
 </section>
@@ -253,13 +253,13 @@
     </div>
     <div class="how-step">
       <div class="how-num">02</div>
-      <h3>Multilingual memo</h3>
-      <p>We translate the insight into a 4-slide visual memo in English, Chinese, and Japanese.</p>
+      <h3>Multilingual memo — in non-technical words</h3>
+      <p>We translate the insight into a 4-slide visual memo in English, Chinese, and Japanese (more to come!).</p>
     </div>
     <div class="how-step">
       <div class="how-num">03</div>
-      <h3>Shared everywhere</h3>
-      <p>Each slide works as a standalone social post — or read the full sequence here.</p>
+      <h3>1-minute spark for you</h3>
+      <p>Each slide carries one core point, condensing frontier research into a 15-second skim. Read the full sequence here, or follow our curation on social soon.</p>
     </div>
   </div>
 </section>
@@ -318,7 +318,7 @@
 </div>
 
 <script>
-const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtG_tsVISezCEkRDyMMiEtyiSQ1VG4Yzx0MSxHmXcJ1cmhLwRYsaHdObGO260q1YM5UNgVA4Ci7i4j/pub?gid=365175489&single=true&output=csv';
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTRws9gNsV0phZLluYU3Q7hKLwNKrmBnEVh4SQpk1fL7W8lVEM_FFmfK2ZRMXpb7K5feLMBiuu-T05Y/pub?gid=1390533586&single=true&output=csv';
 
 // ── CSV parser for Google Sheets published CSV ──
 function parseCSV(text) {
