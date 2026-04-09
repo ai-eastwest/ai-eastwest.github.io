@@ -200,6 +200,23 @@
     color: var(--accent);
     font-weight: 500;
   }
+  .nav-dropdown .nav-drop-label {
+    display: block;
+    padding: 10px 24px 4px;
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    pointer-events: none;
+  }
+  .nav-dropdown .nav-drop-sub {
+    padding-left: 40px;
+    font-size: 0.68rem;
+    color: var(--mid);
+    opacity: 0.75;
+  }
+  .nav-dropdown .nav-drop-sub:hover { opacity: 1; }
 
   /* ── CHAPTER 1: HERO ── */
   .hero {
@@ -1101,10 +1118,11 @@
     <a href="#connect" class="nav-cta">Stay in Touch</a>
     <button class="nav-menu-btn" onclick="document.getElementById('navDropdown').classList.toggle('open')">Menu ▾</button>
     <div class="nav-dropdown" id="navDropdown">
-      <a href="#name" onclick="document.getElementById('navDropdown').classList.remove('open')">The Name</a>
-      <a href="#problem" onclick="document.getElementById('navDropdown').classList.remove('open')">The Problem</a>
-      <a href="#lanes" onclick="document.getElementById('navDropdown').classList.remove('open')">What We Do</a>
-      <a href="#stories" onclick="document.getElementById('navDropdown').classList.remove('open')">Stories</a>
+      <a href="index.html" class="nav-drop-label" style="pointer-events:auto; text-decoration:none;">Home</a>
+      <a href="#name" class="nav-drop-sub" onclick="document.getElementById('navDropdown').classList.remove('open')">· The Name</a>
+      <a href="#problem" class="nav-drop-sub" onclick="document.getElementById('navDropdown').classList.remove('open')">· The Problem</a>
+      <a href="#lanes" class="nav-drop-sub" onclick="document.getElementById('navDropdown').classList.remove('open')">· What We Do</a>
+      <a href="#stories" class="nav-drop-sub" onclick="document.getElementById('navDropdown').classList.remove('open')">· Stories</a>
       <a href="research-translated-cms.html">Research, Translated</a>
       <a href="team.html">Team</a>
       <a href="#connect" onclick="document.getElementById('navDropdown').classList.remove('open')">Stay in Touch ↓</a>

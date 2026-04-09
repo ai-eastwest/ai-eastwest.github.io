@@ -208,8 +208,74 @@
   .footer-tagline { font-family: 'Inconsolata', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.22); margin-top: 6px; text-transform: uppercase; }
   .footer-right { font-family: 'Inconsolata', monospace; font-size: 0.62rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.18); text-transform: uppercase; }
 
+  .nav-menu-btn {
+    display: none;
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: white;
+    background: var(--navy);
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+  }
+  .nav-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 24px;
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    padding: 12px 0;
+    min-width: 220px;
+    z-index: 200;
+  }
+  .nav-dropdown.open { display: block; }
+  .nav-dropdown a {
+    display: block;
+    padding: 12px 24px;
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .nav-dropdown a:hover { background: var(--cream); color: var(--navy); }
+  .nav-dropdown a:last-child {
+    margin-top: 8px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .nav-dropdown .nav-drop-label {
+    display: block;
+    padding: 10px 24px 4px;
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    pointer-events: none;
+  }
+  .nav-dropdown .nav-drop-sub {
+    padding-left: 40px;
+    font-size: 0.68rem;
+    color: var(--mid);
+    opacity: 0.75;
+  }
+  .nav-dropdown .nav-drop-sub:hover { opacity: 1; }
+
   @media (max-width: 1024px) {
     nav { padding: 18px 24px; }
+    .nav-back { display: none; }
+    .nav-menu-btn { display: block; }
     .hero, .how-section, .cards-section, .cta-section { padding-left: 24px; padding-right: 24px; }
     .divider { margin: 0 24px; }
     .cards-grid { grid-template-columns: 1fr; }
@@ -229,6 +295,17 @@
 <nav>
   <a href="index.html" class="nav-logo">AI <span>East</span> West</a>
   <a href="index.html" class="nav-back" style="background: var(--navy); color: white; padding: 8px 18px; border-radius: 3px; transition: background 0.2s;">← Back to Main</a>
+  <button class="nav-menu-btn" onclick="document.getElementById('navDropdown').classList.toggle('open')">Menu ▾</button>
+  <div class="nav-dropdown" id="navDropdown">
+    <a href="index.html" class="nav-drop-label" style="pointer-events:auto; text-decoration:none;">Home</a>
+    <a href="index.html#name" class="nav-drop-sub">· The Name</a>
+    <a href="index.html#problem" class="nav-drop-sub">· The Problem</a>
+    <a href="index.html#lanes" class="nav-drop-sub">· What We Do</a>
+    <a href="index.html#stories" class="nav-drop-sub">· Stories</a>
+    <a href="research-translated-cms.html">Research, Translated</a>
+    <a href="team.html">Team</a>
+    <a href="index.html#connect">Stay in Touch ↓</a>
+  </div>
 </nav>
 
 <section class="hero">
