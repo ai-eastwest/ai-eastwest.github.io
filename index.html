@@ -146,6 +146,61 @@
 
   .nav-cta:hover { background: var(--navy-dark); }
 
+  /* ── MOBILE MENU ── */
+  .nav-menu-btn {
+    display: none;
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: white;
+    background: var(--navy);
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .nav-menu-btn:hover { background: var(--navy-dark); }
+
+  .nav-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 24px;
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    padding: 12px 0;
+    min-width: 220px;
+    z-index: 200;
+  }
+  .nav-dropdown.open { display: block; }
+
+  .nav-dropdown a {
+    display: block;
+    padding: 12px 24px;
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-dropdown a:hover {
+    background: var(--cream);
+    color: var(--navy);
+  }
+  .nav-dropdown a:last-child {
+    margin-top: 8px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    color: var(--accent);
+    font-weight: 500;
+  }
+
   /* ── CHAPTER 1: HERO ── */
   .hero {
     min-height: calc(70vh - 64px);
@@ -1019,6 +1074,8 @@
     .signup-form { flex-direction: column; }
     footer { flex-direction: column; align-items: flex-start; }
     .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .nav-menu-btn { display: block; }
   }
 
   @keyframes pulse {
@@ -1042,6 +1099,16 @@
       <li><a href="team.html">Team</a></li>
     </ul>
     <a href="#connect" class="nav-cta">Stay in Touch</a>
+    <button class="nav-menu-btn" onclick="document.getElementById('navDropdown').classList.toggle('open')">Menu ▾</button>
+    <div class="nav-dropdown" id="navDropdown">
+      <a href="#name" onclick="document.getElementById('navDropdown').classList.remove('open')">The Name</a>
+      <a href="#problem" onclick="document.getElementById('navDropdown').classList.remove('open')">The Problem</a>
+      <a href="#lanes" onclick="document.getElementById('navDropdown').classList.remove('open')">What We Do</a>
+      <a href="#stories" onclick="document.getElementById('navDropdown').classList.remove('open')">Stories</a>
+      <a href="research-translated-cms.html">Research, Translated</a>
+      <a href="team.html">Team</a>
+      <a href="#connect" onclick="document.getElementById('navDropdown').classList.remove('open')">Stay in Touch ↓</a>
+    </div>
   </div>
 </nav>
 
