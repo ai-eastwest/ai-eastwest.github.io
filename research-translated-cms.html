@@ -407,9 +407,9 @@ function renderCards() {
         <div class="memo-card-topic">${firstSlide.topic || ''}</div>
         <div class="memo-card-headline">${firstSlide.headline || ''}</div>
         <div class="memo-card-researcher">${firstSlide.researcher_name || ''} · ${firstSlide.researcher_affiliation || ''}</div>
-        ${firstSlide.paper_link ? `<a href="${firstSlide.paper_link}" target="_blank" onclick="event.stopPropagation();" style="display: inline-block; font-family: 'Inconsolata', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: white; background: var(--navy); text-decoration: none; padding: 6px 14px; border-radius: 3px; margin-bottom: 12px;">Read paper →</a>` : ''}
         <div class="memo-card-langs">
           ${memo.langs.map(l => `<span class="lang-btn${l===firstLang?' active':''}" onclick="event.stopPropagation(); openCarousel('${id}','${l}')">${l}</span>`).join('')}
+          ${firstSlide.paper_link ? `<a href="${firstSlide.paper_link}" target="_blank" onclick="event.stopPropagation();" class="lang-btn" style="background: var(--accent); color: white; border-color: var(--accent); text-decoration: none;">Paper →</a>` : ''}
         </div>
         <div class="memo-card-cta">Read memo →</div>
       </div>
