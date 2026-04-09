@@ -907,6 +907,12 @@
 
   .signup-input::placeholder { color: rgba(255,255,255,0.32); }
 
+  .signup-input option {
+    background: var(--charcoal);
+    color: white;
+    padding: 8px;
+  }
+
   .signup-input:focus {
     border-color: rgba(255,255,255,0.32);
     background: rgba(255,255,255,0.11);
@@ -1324,37 +1330,37 @@
   <h2 class="reveal">Follow this work<br>as it takes <em>shape</em></h2>
   <p class="cta-sub reveal">Whether you research, build, teach, or simply live alongside AI, we'd love to know who you are and what matters to you. Fill in the short form below to stay connected.</p>
 
-  <form class="signup-form reveal" onsubmit="handleSubmit(event)" style="flex-direction: column; max-width: 460px; gap: 14px;">
+  <form class="signup-form reveal" id="aiewForm" onsubmit="handleSubmit(event)" style="flex-direction: column; max-width: 460px; gap: 14px;">
 
-    <input type="text" class="signup-input" placeholder="Name (optional)" style="width: 100%;" />
+    <input type="text" name="name" class="signup-input" placeholder="Name *" required style="width: 100%;" />
 
-    <input type="email" class="signup-input" placeholder="Email address *" required style="width: 100%;" />
+    <input type="email" name="email" class="signup-input" placeholder="Email address *" required style="width: 100%;" />
 
     <div style="width: 100%; text-align: left;">
       <label style="font-family: 'Inconsolata', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.45); display: block; margin-bottom: 8px;">I'm interested in AIEW as a...</label>
-      <select class="signup-input" style="width: 100%; cursor: pointer; appearance: auto;">
+      <select name="role" class="signup-input" style="width: 100%; cursor: pointer; appearance: auto;">
         <option value="">Select one</option>
-        <option value="researcher">Researcher</option>
-        <option value="practitioner">Practitioner / Industry</option>
-        <option value="educator">Educator</option>
-        <option value="journalist">Journalist / Media</option>
-        <option value="organisation">Organisation</option>
-        <option value="curious">Curious individual</option>
-        <option value="other">Other</option>
+        <option value="Researcher">Researcher</option>
+        <option value="Practitioner / Industry">Practitioner / Industry</option>
+        <option value="Educator">Educator</option>
+        <option value="Journalist / Media">Journalist / Media</option>
+        <option value="Organisation">Organisation</option>
+        <option value="Curious individual">Curious individual</option>
+        <option value="Other">Other</option>
       </select>
     </div>
 
     <div style="width: 100%; text-align: left;">
       <label style="font-family: 'Inconsolata', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.45); display: block; margin-bottom: 10px;">Topics I care about (select any)</label>
       <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 300; cursor: pointer;"><input type="checkbox" style="accent-color: var(--accent);"> AI safety &amp; evaluation</label>
-        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 300; cursor: pointer;"><input type="checkbox" style="accent-color: var(--accent);"> AI governance &amp; policy</label>
-        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 300; cursor: pointer;"><input type="checkbox" style="accent-color: var(--accent);"> Cross-cultural AI</label>
-        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 300; cursor: pointer;"><input type="checkbox" style="accent-color: var(--accent);"> AI in education</label>
-        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 300; cursor: pointer;"><input type="checkbox" style="accent-color: var(--accent);"> AI in healthcare &amp; care</label>
-        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 300; cursor: pointer;"><input type="checkbox" style="accent-color: var(--accent);"> AI &amp; creative work</label>
-        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 300; cursor: pointer;"><input type="checkbox" style="accent-color: var(--accent);"> AI companions &amp; human-AI relationships</label>
-        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 300; cursor: pointer;"><input type="checkbox" style="accent-color: var(--accent);"> AI &amp; labor</label>
+        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 300; cursor: pointer;"><input type="checkbox" name="topics" value="AI safety & evaluation" style="accent-color: var(--accent);"> AI safety &amp; evaluation</label>
+        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 300; cursor: pointer;"><input type="checkbox" name="topics" value="AI governance & policy" style="accent-color: var(--accent);"> AI governance &amp; policy</label>
+        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 300; cursor: pointer;"><input type="checkbox" name="topics" value="Cross-cultural AI" style="accent-color: var(--accent);"> Cross-cultural AI</label>
+        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 300; cursor: pointer;"><input type="checkbox" name="topics" value="AI in education" style="accent-color: var(--accent);"> AI in education</label>
+        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 300; cursor: pointer;"><input type="checkbox" name="topics" value="AI in healthcare & care" style="accent-color: var(--accent);"> AI in healthcare &amp; care</label>
+        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 300; cursor: pointer;"><input type="checkbox" name="topics" value="AI & creative work" style="accent-color: var(--accent);"> AI &amp; creative work</label>
+        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 300; cursor: pointer;"><input type="checkbox" name="topics" value="AI companions & human-AI relationships" style="accent-color: var(--accent);"> AI companions &amp; human-AI relationships</label>
+        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 300; cursor: pointer;"><input type="checkbox" name="topics" value="AI & labor" style="accent-color: var(--accent);"> AI &amp; labor</label>
       </div>
     </div>
 
@@ -1390,14 +1396,36 @@
 
   function handleSubmit(e) {
     e.preventDefault();
-    const btn = e.target.querySelector('.signup-btn');
-    const input = e.target.querySelector('.signup-input');
-    btn.textContent = 'Thank you';
-    btn.style.background = '#4d5795';
-    input.value = '';
-    input.placeholder = 'You\'re on the list.';
-    input.disabled = true;
+    const form = e.target;
+    const btn = form.querySelector('.signup-btn');
+    const originalText = btn.textContent;
+    btn.textContent = 'Sending...';
     btn.disabled = true;
+
+    const data = {
+      name: form.querySelector('input[name="name"]').value,
+      email: form.querySelector('input[name="email"]').value,
+      role: form.querySelector('select[name="role"]').value,
+      topics: Array.from(form.querySelectorAll('input[name="topics"]:checked')).map(cb => cb.value)
+    };
+
+    fetch('https://script.google.com/macros/s/AKfycby4a9ykregASVIFfRwHalFqjB__7mf3BL4P8hQnEmYHpuGPqbfHM70tzdcmyZEadQVCcw/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(() => {
+      btn.textContent = 'Thank you!';
+      btn.style.background = '#4d5795';
+      form.querySelectorAll('input, select').forEach(el => { el.disabled = true; });
+      form.querySelector('input[name="name"]').value = '';
+      form.querySelector('input[name="email"]').value = '';
+      form.querySelector('input[name="email"]').placeholder = "You're on the list.";
+    }).catch(() => {
+      btn.textContent = 'Thank you!';
+      btn.style.background = '#4d5795';
+      form.querySelectorAll('input, select').forEach(el => { el.disabled = true; });
+    });
   }
 </script>
 
